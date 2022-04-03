@@ -1,0 +1,11 @@
+{
+  "name": "flood-bangumi-editor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "George Miao",
+  "license": "MIT",
+  "dependencies": {
+    "flood-api": "^1.1.5"
+  },
+  "devDependencies": {}
+}
