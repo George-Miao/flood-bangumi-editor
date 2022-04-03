@@ -20,6 +20,10 @@ const map = t => {
   }
 }
 
+const escape = (path) =>
+  path.replace("/", "_")
+
+
 const reduce = ts => {
   const tmp = ts.reduce((acc, t) => {
     acc[t.tag] === undefined ? (acc[t.tag] = [t.hash]) : acc[t.tag].push(t.hash)
@@ -28,7 +32,7 @@ const reduce = ts => {
 
   return Object.entries(tmp).map(([tag, hashes]) => ({
     hashes,
-    destination: `/download/bangumi/${tag}`,
+    destination: `/download/bangumi/${escape(tag)}`,
     moveFiles: true,
     isBasePath: true,
     isCheckHash: true
@@ -51,7 +55,7 @@ const main = async () => {
     .then(reduce)
 
   console.log(ret)
-  console.log("\n\n############################\n\n")
+  console.log("\n############################\n\n")
 
 
   await Promise.all(ret.map(api.torrents.move))
