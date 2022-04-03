@@ -51,6 +51,8 @@ const main = async () => {
     .then(reduce)
 
   console.log(ret)
+  console.log("\n\n############################\n\n")
+
 
   await Promise.all(ret.map(api.torrents.move))
 
