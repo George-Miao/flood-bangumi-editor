@@ -39,7 +39,7 @@ const reduce = ts => {
   }))
 }
 
-const needsUpdate = ({ dir, tag }) => !dir.endsWith(tag)
+const needsUpdate = ({ dir, tag }) => tag && !dir.endsWith(tag)
 
 const main = async () => {
   if (!(await api.client.connectionTest().then(r => r.isConnected))) {
