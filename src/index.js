@@ -2,8 +2,8 @@ const Api = require('flood-api').default
 
 const api = new Api({
   baseUrl: 'http://localhost:3000/api',
-  username: process.env.USERNAME,
-  password: process.env.PASSWORD
+  username: process.env.FLOOD_USERNAME,
+  password: process.env.FLOOD_PASSWORD
 })
 
 const map = t => {
