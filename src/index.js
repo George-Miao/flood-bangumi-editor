@@ -1,7 +1,7 @@
 const Api = require('flood-api').default
 
 const api = new Api({
-  baseUrl: 'http://localhost:3000/api',
+  baseUrl: 'http://localhost/api',
   username: process.env.FLOOD_USERNAME,
   password: process.env.FLOOD_PASSWORD
 })
