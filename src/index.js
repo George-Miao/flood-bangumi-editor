@@ -71,9 +71,7 @@ const main = async () => {
   console.log("\n############################\n\n")
 
 
-  // await Promise.all(ret.map(api.torrents.move))
-
-  // console.log(await api.torrents.list())
+  await Promise.all(ret.map(api.torrents.move))
 
   process.exit(0)
 }
