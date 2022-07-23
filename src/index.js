@@ -23,6 +23,19 @@ const map = t => {
 const escape = (path) =>
   path.replace("/", "_")
 
+const tag_pattern = /^(.*) S(\d+)$/
+
+const buildDest = tag_in => {
+  const tag_escaped = escape(tag_in)
+  let res
+  if (res = tag_escaped.match(tag_pattern)) {
+    const [_, tag, season] = res
+    return `/download/bangumi/S${season}/${tag}/`
+  } else {
+    return `/download/bangumi/S1/${tag_escaped}/`
+  }
+}
+
 
 const reduce = ts => {
   const tmp = ts.reduce((acc, t) => {
@@ -32,7 +45,7 @@ const reduce = ts => {
 
   return Object.entries(tmp).map(([tag, hashes]) => ({
     hashes,
-    destination: `/download/bangumi/${escape(tag)}`,
+    destination: buildDest(tag),
     moveFiles: true,
     isBasePath: true,
     isCheckHash: true
