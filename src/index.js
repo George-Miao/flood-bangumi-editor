@@ -21,7 +21,7 @@ const map = t => {
 }
 
 const escape = (path) =>
-  path.replace("/", "_")
+  path.replace("/", "_").trim()
 
 const tag_pattern = /^(.*) S(\d+)$/
 
@@ -30,9 +30,9 @@ const buildDest = tag_in => {
   let res
   if (res = tag_escaped.match(tag_pattern)) {
     const [_, tag, season] = res
-    return `/download/bangumi/S${season}/${tag}/`
+    return `/download/bangumi/${tag}/S${season}/`
   } else {
-    return `/download/bangumi/S1/${tag_escaped}/`
+    return `/download/bangumi/${tag_escaped}/S1/`
   }
 }
 
@@ -52,7 +52,7 @@ const reduce = ts => {
   }))
 }
 
-const needsUpdate = ({ dir, tag }) => tag && !dir.endsWith(tag)
+const needsUpdate = ({ dir, tag }) => tag && dir && buildDest(tag) !== dir
 
 const main = async () => {
   if (!(await api.client.connectionTest().then(r => r.isConnected))) {
@@ -71,7 +71,9 @@ const main = async () => {
   console.log("\n############################\n\n")
 
 
-  await Promise.all(ret.map(api.torrents.move))
+  // await Promise.all(ret.map(api.torrents.move))
+
+  // console.log(await api.torrents.list())
 
   process.exit(0)
 }
